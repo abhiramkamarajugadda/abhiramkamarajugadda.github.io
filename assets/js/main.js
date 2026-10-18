@@ -274,8 +274,13 @@
   // ---------- Welcome balloon ----------
   var balloon = document.getElementById('balloon');
   balloon.querySelector('.balloon-close').addEventListener('click', function () { balloon.hidden = true; });
-  setTimeout(function () { balloon.hidden = false; }, 700);
-  setTimeout(function () { balloon.hidden = true; }, 9000);
+  function showBalloon() {
+    setTimeout(function () { balloon.hidden = false; }, 700);
+    setTimeout(function () { balloon.hidden = true; }, 9000);
+  }
+  // Wait for the XP login sequence (boot.js) before greeting; show right away if it isn't running.
+  if (document.documentElement.classList.contains('xp-booting')) document.addEventListener('xp:loggedin', showBalloon, { once: true });
+  else showBalloon();
 
   // Keep windows on-screen when the viewport is resized.
   window.addEventListener('resize', function () {

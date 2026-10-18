@@ -20,3 +20,6 @@ python3 -m http.server 8000
 - Email: abhiram.kamarajugadda4@gmail.com
 - LinkedIn: https://www.linkedin.com/in/abhiram-kamarajugadda/
 - GitHub: https://github.com/Haaseth
+
+## Startup sequence
+Every page load plays an XP boot screen (~2s, click/Enter to skip) and the Welcome/login screen; click the user tile to log on. Implemented in `assets/js/boot.js` + `assets/css/boot.css`. Without JavaScript the desktop content is shown directly.

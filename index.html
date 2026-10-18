@@ -18,8 +18,65 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="stylesheet" href="vendor/xp.css/XP.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/boot.css">
+  <script>
+    /* Start in the XP boot/login sequence only when JS runs; failsafe reveals the desktop if boot.js never initialises. */
+    (function (d) { d.classList.add('xp-booting');
+      setTimeout(function () { if (!window.__xpBoot) d.classList.remove('xp-booting'); }, 6000); })(document.documentElement);
+  </script>
 </head>
 <body>
+  <!-- ============ XP STARTUP (boot + Welcome login). Shown only with JS; see boot.css / boot.js ============ -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="xf-r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8a5c"/><stop offset="1" stop-color="#e8361c"/></linearGradient>
+      <linearGradient id="xf-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9be35a"/><stop offset="1" stop-color="#3aa81c"/></linearGradient>
+      <linearGradient id="xf-b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5fb4ff"/><stop offset="1" stop-color="#1767d8"/></linearGradient>
+      <linearGradient id="xf-y" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe066"/><stop offset="1" stop-color="#f5b400"/></linearGradient>
+      <symbol id="xp-flag" viewBox="0 0 100 90">
+        <path fill="url(#xf-r)" d="M14 8 C26 2 37 3 50 9 L44 41 C32 35 21 34 8 40 Z"/>
+        <path fill="url(#xf-g)" d="M54 11 C66 17 79 18 97 11 L91 43 C74 50 61 49 48 43 Z"/>
+        <path fill="url(#xf-b)" d="M7 44 C20 38 31 39 43 45 L37 77 C25 71 14 70 1 76 Z"/>
+        <path fill="url(#xf-y)" d="M47 47 C60 53 73 54 90 47 L84 79 C67 86 54 85 41 79 Z"/>
+      </symbol>
+    </defs>
+  </svg>
+  <div id="xp-start">
+    <div class="xs-boot" id="xs-boot" role="img" aria-label="Windows XP is starting">
+      <div class="xp-logo" aria-hidden="true">
+          <svg width="74" height="66" viewBox="0 0 100 90"><use href="#xp-flag"/></svg>
+          <div class="xp-word"><span class="ms">Microsoft<sup>&reg;</sup></span><span class="win">Windows<sup>&reg;</sup><span class="xp">xp</span></span></div>
+        </div>
+      <div class="xs-trough" aria-hidden="true"><div class="blocks"><i></i><i></i><i></i></div></div>
+      <span class="copy">Copyright &copy; Abhiram Kamarajugadda</span>
+      <span class="brand">Microsoft</span>
+    </div>
+    <div class="xs-login" id="xs-login" role="dialog" aria-modal="true" aria-label="Welcome. Click Abhiram to log on." hidden>
+      <div class="xl-top"></div>
+      <div class="xl-main">
+        <div class="xl-left">
+          <div class="xp-logo" aria-hidden="true">
+          <svg width="74" height="66" viewBox="0 0 100 90"><use href="#xp-flag"/></svg>
+          <div class="xp-word"><span class="ms">Microsoft<sup>&reg;</sup></span><span class="win">Windows<sup>&reg;</sup><span class="xp">xp</span></span></div>
+        </div>
+          <p class="xl-hint">To begin, click your user name</p>
+          <p class="xl-welcome" aria-live="polite">welcome</p>
+        </div>
+        <div class="xl-divider" aria-hidden="true"></div>
+        <div class="xl-right">
+          <button type="button" class="xl-user" id="xl-user" aria-label="Log on as Abhiram, Java Backend Developer">
+            <span class="xl-avatar" aria-hidden="true">KA</span>
+            <span class="xl-name"><b>K.H.V.N.S. Abhiram</b><small>Java Backend Developer</small><em>Loading your personal settings...</em></span>
+          </button>
+        </div>
+      </div>
+      <div class="xl-bottom">
+        <button type="button" class="xl-off" id="xl-off"><span class="xl-power" aria-hidden="true"></span><span>Turn off computer</span></button>
+        <p class="xl-help">After you log on, you can add or change accounts.<br>Just go to Control Panel and click User Accounts.</p>
+        <div class="xl-toast" id="xl-toast" role="status" hidden>Nice try. Click Abhiram to log on.</div>
+      </div>
+    </div>
+  </div>
   <a class="skip-link" href="#win-about">Skip to content</a>
 
   <main id="desktop" class="desktop" aria-label="Desktop">
@@ -297,6 +354,7 @@
     </div>
   </footer>
 
+  <script src="assets/js/boot.js" onerror="document.documentElement.classList.remove('xp-booting')"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>
